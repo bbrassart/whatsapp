@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+
+<head>
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+
+  <!-- CSS Reset -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+
+  <!-- Milligram CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+  <title>WhatsApp chat with unknown contact</title>
+  <meta name="description" content="WhatsApp chat with unknown contact">
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <h1>WhatsApp: Chat with unknown number</h1>
+      <form id="whatsapp">
+        <fieldset>
+          <label for="numberField">International Phone number</label>
+          <input type="text" name="phone" placeholder="Enter number" id="numberField">
+          <input class="button-primary" type="submit" value="Start chatting" id="cta">
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</body>
+
+<script type="text/javascript">
+  const openChat = (phone) => {
+    const link = document.createElement("a");
+    link.setAttribute("href", `whatsapp://send?phone=${phone}`);
+    document.body.append(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const whatsAppForm = document.forms.whatsapp;
+
+  whatsAppForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const formElements = new FormData(whatsAppForm);
+    console.log(formElements)
+
+    if (!formElements.get('phone')) {
+      return null;
+    }
+    openChat(formElements.get('phone'));
+  });
+</script>
+
+</html>

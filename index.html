@@ -13,13 +13,23 @@
     <h1>WhatsApp chat</h1>
     <h4>Enter an international phone number</h4>
     <form id="whatsapp">
-      <input type="text" id="numberField" name="phone" placeholder="Example 34680217615" required>
+      <input id="phone-input" pattern="[0-9 ]+" type="tel" id="numberField" name="phone"
+        placeholder="Example 34680217615" required>
       <button type="submit">Start chatting</button>
     </form>
   </main>
 </body>
 
 <script>
+  document.getElementById('phone-input').addEventListener('change', (event) => {
+    const input = event.target;
+    if (input.validity.patternMismatch) {
+      input.setCustomValidity('Only numbers and white spaces are allowed');
+    } else {
+      input.setCustomValidity('');
+    }
+  }, false);
+
   const openChat = (phone) => {
     const url =
       (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) ?

@@ -26,8 +26,12 @@
 
 <script>
   const openChat = (phone) => {
+    let url = `https://web.whatsapp.com/send?phone=${phone}&text&type=phone_number`;
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      url = `https://wa.me/${phone}`;
+    }
     const link = document.createElement("a");
-    link.setAttribute("href", `https://web.whatsapp.com/send?phone=${phone}&text&type=phone_number`);
+    link.setAttribute("href", url);
     document.body.append(link);
     link.click();
     document.body.removeChild(link);

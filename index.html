@@ -1,35 +1,31 @@
 <!doctype html>
-<html>
+<html style="font-size: 2rem;">
 
 <head>
   <!-- Pico CSS -->
   <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css">
-  <title>WhatsApp Web chat with unknown contact</title>
-  <meta name="description" content="WhatsApp Web chat with unknown contact">
+  <title>WhatsApp chat with unknown contact</title>
+  <meta name="description" content="WhatsApp chat with unknown contact">
 </head>
 
 <body>
-  <main class="container-fluid">
-    <h1>WhatsApp Web: Chat with unknown contact</h1>
-    <div class="section">
-      <form id="whatsapp">
-        <label for="numberField">International Phone number</label>
-        <input type="text" id="numberField" name="phone" placeholder="Enter number" required>
-        <small>Example of a Spanish number 34680217615</small>
-        <button type="submit">Start chatting</button>
-      </form>
-    </div>
-
+  <main class="container">
+    <h1>WhatsApp chat</h1>
+    <h4>Enter an international phone number</h4>
+    <form id="whatsapp">
+      <input type="text" id="numberField" name="phone" placeholder="Example 34680217615" required>
+      <button type="submit">Start chatting</button>
+    </form>
   </main>
-
 </body>
 
 <script>
   const openChat = (phone) => {
-    let url = `https://web.whatsapp.com/send?phone=${phone}&text&type=phone_number`;
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-      url = `https://wa.me/${phone}`;
-    }
+    const url =
+      (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) ?
+        `https://wa.me/${phone}` :
+        `https://web.whatsapp.com/send?phone=${phone}&text&type=phone_number`;
+
     const link = document.createElement("a");
     link.setAttribute("href", url);
     document.body.append(link);
